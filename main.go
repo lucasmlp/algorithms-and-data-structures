@@ -1,16 +1,18 @@
 package main
 
 import (
-	"fmt"
+	"log"
 
 	"github.com/machado-br/algorithms-and-data-structures/dataStructures"
 )
 
 func main() {
-	fmt.Println("Testing stack")
+	log.Println("Testing stack")
 	testStack()
-	fmt.Println("Testing queue")
+	log.Println("Testing queue")
 	testQueue()
+	log.Println("Testing linked list")
+	testLinkedList()
 }
 
 func testStack() {
@@ -26,7 +28,7 @@ func testStack() {
 
 	for i := 0; i < stackLength; i++ {
 		element, _ := stack.Pop()
-		fmt.Printf("element: %v\n", element)
+		log.Printf("element: %v\n", element)
 	}
 }
 
@@ -43,6 +45,23 @@ func testQueue() {
 
 	for i := 0; i < stackLength; i++ {
 		element, _ := queue.Dequeue()
-		fmt.Printf("element: %v\n", element)
+		log.Printf("element: %v\n", element)
+	}
+}
+
+func testLinkedList() {
+	linkedList := dataStructures.NewLinkedList("head")
+	log.Println("Inserting node_1")
+	_ = linkedList.Insert("node_1")
+
+	log.Println("Inserting node_2")
+	_ = linkedList.Insert("node_2")
+
+	log.Println("Inserting node_3")
+	_ = linkedList.Insert("node_3")
+
+	log.Printf("linkedList: %v\n", linkedList)
+	for _, node := range linkedList.List {
+		log.Printf("node: %v\n", node)
 	}
 }
