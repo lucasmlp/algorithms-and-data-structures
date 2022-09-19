@@ -2,20 +2,29 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/machado-br/algorithms-and-data-structures/dataStructures"
 )
 
 func main() {
-	log.Println("Testing stack")
+	action := os.Args[1]
+
+	switch action {
+	case "TestStack":
 	testStack()
-	log.Println("Testing queue")
+
+	case "TestQueue":
 	testQueue()
-	log.Println("Testing linked list")
+
+	case "TestLinkedList":
 	testLinkedList()
+}
 }
 
 func testStack() {
+	log.Println("Testing stack")
+
 	stack := dataStructures.NewStack()
 
 	stack.Push("Golang ")
@@ -33,6 +42,8 @@ func testStack() {
 }
 
 func testQueue() {
+	log.Println("Testing queue")
+
 	queue := dataStructures.NewQueue()
 
 	queue.Enqueue("Golang ")
@@ -50,18 +61,24 @@ func testQueue() {
 }
 
 func testLinkedList() {
+	log.Println("Testing linked list")
+
 	linkedList := dataStructures.NewLinkedList("head")
-	log.Println("Inserting node_1")
-	_ = linkedList.Insert("node_1")
 
-	log.Println("Inserting node_2")
-	_ = linkedList.Insert("node_2")
-
-	log.Println("Inserting node_3")
+	node1 := linkedList.Insert("node_1")
+	node2 := linkedList.Insert("node_2")
 	_ = linkedList.Insert("node_3")
 
-	log.Printf("linkedList: %v\n", linkedList)
-	for _, node := range linkedList.List {
+	linkedList.Delete(node2.Key)
+
+	node := linkedList.Head
+	log.Printf("node: %v\n", node)
+
+	for node.Next != nil {
+		node = node.Next
 		log.Printf("node: %v\n", node)
 	}
+
+	nodeFound := linkedList.Search(node1.Key)
+	log.Printf("nodeFound: %v\n", nodeFound)
 }

@@ -1,11 +1,6 @@
 package dataStructures
 
-import (
-	"log"
-)
-
 type LinkedList struct {
-	List []Node
 	Head *Node
 }
 
@@ -21,7 +16,6 @@ func NewLinkedList(key string) LinkedList {
 
 	return LinkedList{
 		Head: &head,
-		List: []Node{head},
 	}
 }
 
@@ -34,12 +28,30 @@ func (lL *LinkedList) Insert(key string) *Node {
 	newNode := Node{
 		Key: key,
 	}
-	log.Printf("newNode: %v\n", newNode)
 
 	node.Next = &newNode
-	log.Printf("node: %v\n", node)
-
-	lL.List = append(lL.List, newNode)
 
 	return &newNode
+}
+
+func (lL *LinkedList) Delete(key string) {
+	node := lL.Head
+	var lastNode *Node
+	for node.Key != key{
+		lastNode = node
+		node = node.Next
+	}
+
+	lastNode.Next = node.Next
+
+	node = nil
+}
+
+func (lL *LinkedList) Search(key string) *Node {
+	node := lL.Head
+	for node.Key != key{
+		node = node.Next
+	}
+	
+	return node
 }
